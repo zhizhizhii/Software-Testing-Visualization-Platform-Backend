@@ -1,16 +1,45 @@
 package com.st.service;
 
+import cn.afterturn.easypoi.excel.ExcelExportUtil;
+import cn.afterturn.easypoi.excel.ExcelImportUtil;
+import cn.afterturn.easypoi.excel.entity.ExportParams;
+import cn.afterturn.easypoi.excel.entity.ImportParams;
+import com.st.entity.CashCase;
 import com.st.request.CashTestItem;
 import com.st.view.CashTestItemView;
 import com.st.view.CashTestView;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class CashTestService {
+    public Workbook handleFile(MultipartFile file) throws Exception {
+        byte [] byteArr = file.getBytes();
+        InputStream inputStream = new ByteArrayInputStream(byteArr);
+        ImportParams params = new ImportParams();
+        params.setTitleRows(0);
+        params.setHeadRows(1);
+        List<CashCase> cashCases = ExcelImportUtil.importExcel(inputStream,CashCase.class,params);
+        cashCases.forEach(System.out::println);
+        for(CashCase item : cashCases){
+            result r = test(31,item.getMinute(),item.getTimes());
+            item.setActual(r.actual);
+            item.setInfo(r.info);
+            String result = item.getExpectation() == r.actual ? "测试通过":"测试未通过";
+            item.setTest_result(result);
+            item.setTest_time(new Date());
+        }
+        Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("测试结果","而是结果"),CashCase.class,cashCases);
+        return workbook;
+    }
+
     public static int getDaysByYearMonth(int year, int month) {
 
         Calendar a = Calendar.getInstance();
