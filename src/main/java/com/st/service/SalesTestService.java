@@ -32,11 +32,17 @@ public class SalesTestService {
         salesCases.forEach(System.out::println);
         String result;
         for(SalesCase item : salesCases){
-            result r = test(item.getM(),item.getI(),item.getP());
+            result r = test(item.getMachine(),item.getInspector(),item.getPeripheral());
             item.setActual(r.actual);
             item.setAmount(r.amount);
-            if(item.getPredict() == r.actual){
-                if(item.getPre_earn() == r.earn){
+            item.setEarn(r.earn);
+
+            System.out.println(r.actual);
+            System.out.println(r.amount);
+            System.out.println(r.earn);
+
+            if( (item.getPredict()).equals(r.actual)){
+                if( (item.getPre_amount()).equals(r.amount)){
                     result="测试通过";
                 }
                 else{
@@ -46,6 +52,7 @@ public class SalesTestService {
             else{
                 result="测试未通过";
             }
+            System.out.println(result);
             item.setTest_result(result);
             item.setTest_time(new Date());
         }
@@ -53,30 +60,13 @@ public class SalesTestService {
         return workbook;
     }
 
-    public static int getDaysByYearMonth(int year, int month) {
-
-        Calendar a = Calendar.getInstance();
-
-        a.set(Calendar.YEAR, year);
-
-        a.set(Calendar.MONTH, month - 1);
-
-        a.set(Calendar.DATE, 1);
-
-        a.roll(Calendar.DATE, -1);
-
-        int maxDate = a.get(Calendar.DATE);
-
-        return maxDate;
-    }
     private class result{
         public String actual;
         public String amount;
         public String earn;
     }
 
-    public SalesTestView doTest(String year, String month, List<SalesTestItem> list){
-        int day = getDaysByYearMonth(Integer.parseInt(year),Integer.parseInt(month));
+    public SalesTestView doTest(List<SalesTestItem> list){
         SalesTestView salesTestView = new SalesTestView();
         List<SalesTestItemView> viewList = new ArrayList<SalesTestItemView>();
         for (SalesTestItem item : list)

@@ -27,9 +27,7 @@ public class SalesTestController {
     @CrossOrigin(value = "http://localhost:8080", maxAge = 1800, allowedHeaders = "*")
     @ResponseBody
     public SalesTestView salesTest(@RequestBody SalesTestRequest salesTestRequest){
-        return salesTestService.doTest(salesTestRequest.getYear()
-                ,salesTestRequest.getMonth()
-                ,salesTestRequest.getSalesTestList());
+        return salesTestService.doTest(salesTestRequest.getSalesTestList());
     }
     @PostMapping(path="/upload")
     @CrossOrigin(value = "http://localhost:8080", maxAge = 1800, allowedHeaders = "*")

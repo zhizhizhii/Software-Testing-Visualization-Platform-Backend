@@ -16,22 +16,22 @@ public class SalesCase {
     //    @Excel(name="月份",format = "yyyy-MM")
 //    private Date month;
     @Excel(name="销售的主机数量M（台）")
-    private String M;
+    private String machine;
     @Excel(name="销售的显示器数量I（台）")
-    private String I;
+    private String inspector;
     @Excel(name="销售的外设数量P（套）")
-    private String P;
-    @Excel(name="预计状态")
+    private String peripheral;
+    @Excel(name="预计状态（正常/错误）")
     private String predict;
-    @Excel(name="预计佣金")
-    private String pre_earn;
-    @Excel(name="预计销售额")
+    @Excel(name="预计销售额（元）")
     private String pre_amount;
-    @Excel(name="实际状态")
+    @Excel(name="预计佣金（元）")
+    private String pre_earn;
+    @Excel(name="实际状态（正常/错误）")
     private String actual;
-    @Excel(name="销售额S（元）")
+    @Excel(name="实际销售额（元））")
     private String amount;
-    @Excel(name="佣金E（元）")
+    @Excel(name="实际佣金（元）")
     private String earn;
     @Excel(name="测试结果")
     private String test_result;
