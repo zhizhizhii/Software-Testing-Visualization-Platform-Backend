@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class CashTestItem {
+public class CalendarTestItem {
     private String id;
 
     @JsonProperty("year")
@@ -13,11 +13,8 @@ public class CashTestItem {
     @JsonProperty("month")
     private String month;
 
-    @JsonProperty("X")
-    private String X;
-
-    @JsonProperty("Y")
-    private String Y;
+    @JsonProperty("day")
+    private String day;
 
     @JsonProperty("expectation")
     private String expectation;
