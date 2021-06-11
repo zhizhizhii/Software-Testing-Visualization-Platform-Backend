@@ -1,9 +1,9 @@
 package com.st.controller;
 
-import com.st.request.CashTestRequest;
-import com.st.service.CashTestService;
-import com.st.view.CashTestItemView;
-import com.st.view.CashTestView;
+import com.st.request.SalesTestRequest;
+import com.st.service.SalesTestService;
+import com.st.view.SalesTestItemView;
+import com.st.view.SalesTestView;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +17,22 @@ import java.io.IOException;
 import java.net.URLEncoder;
 
 @Controller
-@RequestMapping(path="/api/cash")
-public class CashTestController {
+@RequestMapping(path="/api/sales")
+public class SalesTestController {
 
     @Autowired
-    CashTestService cashTestService;
+    SalesTestService salesTestService;
 
     @PostMapping(path="/test")
+    @CrossOrigin(value = "http://localhost:8080", maxAge = 1800, allowedHeaders = "*")
     @ResponseBody
-    public CashTestView cashTest(@RequestBody CashTestRequest cashTestRequest){
-        return cashTestService.doTest(cashTestRequest.getCashTestList());
+    public SalesTestView salesTest(@RequestBody SalesTestRequest salesTestRequest){
+        return salesTestService.doTest(salesTestRequest.getSalesTestList());
     }
-
     @PostMapping(path="/upload")
+    @CrossOrigin(value = "http://localhost:8080", maxAge = 1800, allowedHeaders = "*")
     public void uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response) throws Exception {
-        Workbook workbook = cashTestService.handleFile(file);
+        Workbook workbook = salesTestService.handleFile(file);
         response.setContentType("application/force-download");
         response.setHeader("Content-Disposition","attachment; filename="+ URLEncoder.encode("1.xls","UTF-8"));
         ServletOutputStream outputStream = response.getOutputStream();

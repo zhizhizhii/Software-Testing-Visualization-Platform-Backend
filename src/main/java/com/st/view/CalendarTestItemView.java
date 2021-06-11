@@ -6,9 +6,9 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class CashTestItemView {
+public class CalendarTestItemView {
     private String id;
-    private Double actual;
+    private String actual;
     private String info;
     private String test_result;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")

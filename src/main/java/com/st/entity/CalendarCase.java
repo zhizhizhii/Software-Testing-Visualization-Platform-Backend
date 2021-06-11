@@ -6,24 +6,21 @@ import lombok.Data;
 
 import java.util.Date;
 
-
 @Data
-@ExcelTarget("cashcase")
-public class CashCase {
+@ExcelTarget("calendarcase")
+public class CalendarCase {
     @Excel(name="测试用例编号")
     private String id;
     @Excel(name="年份")
     private String year;
     @Excel(name="月份")
     private String month;
-    @Excel(name="本月的通话分钟数X（分钟）")
-    private String minute;
-    @Excel(name="本年度至本月的累计未按时缴费的次数Y（次）")
-    private String times;
-    @Excel(name="每月的电话总费用预期输出")
+    @Excel(name="天数")
+    private String day;
+    @Excel(name="预期输出")
     private String expectation;
     @Excel(name="实际输出")
-    private Double actual;
+    private String actual;
     @Excel(name="程序运行信息")
     private String info;
     @Excel(name="测试结果")

@@ -6,7 +6,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CashTestRequest {
-    @JsonProperty("cash_test_list")
-    private List<CashTestItem> cashTestList;
+public class SalesTestRequest {
+
+    @JsonProperty("sales_test_list")
+    private List<SalesTestItem> salesTestList;
+
 }
