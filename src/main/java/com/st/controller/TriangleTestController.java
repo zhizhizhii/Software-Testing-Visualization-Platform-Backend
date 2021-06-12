@@ -22,14 +22,12 @@ public class TriangleTestController {
     TriangleTestService triangleTestService;
 
     @PostMapping(path = "/test")
-    @CrossOrigin(value = "http://localhost:8080", maxAge = 1800, allowedHeaders = "*")
     @ResponseBody
     public TriangleTestView triangleTest(@RequestBody TriangleTestRequest triangleTestRequest){
         return triangleTestService.doTest(triangleTestRequest.getTriangleTestItemList());
     }
 
     @PostMapping(path = "/upload")
-    @CrossOrigin(value = "http://localhost:8080", maxAge = 1800, allowedHeaders = "*")
     public void uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response) throws Exception {
         Workbook workbook = triangleTestService.handleFile(file);
         response.setContentType("application/force-download");

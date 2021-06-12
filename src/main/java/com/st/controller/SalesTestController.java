@@ -2,10 +2,8 @@ package com.st.controller;
 
 import com.st.request.SalesTestRequest;
 import com.st.service.SalesTestService;
-import com.st.view.SalesTestItemView;
 import com.st.view.SalesTestView;
 import org.apache.poi.ss.usermodel.Workbook;
-import org.hibernate.jdbc.Work;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -13,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.net.URLEncoder;
 
 @Controller
@@ -24,13 +21,11 @@ public class SalesTestController {
     SalesTestService salesTestService;
 
     @PostMapping(path="/test")
-    @CrossOrigin(value = "http://localhost:8080", maxAge = 1800, allowedHeaders = "*")
     @ResponseBody
     public SalesTestView salesTest(@RequestBody SalesTestRequest salesTestRequest){
         return salesTestService.doTest(salesTestRequest.getSalesTestList());
     }
     @PostMapping(path="/upload")
-    @CrossOrigin(value = "http://localhost:8080", maxAge = 1800, allowedHeaders = "*")
     public void uploadFile(@RequestParam("file") MultipartFile file, HttpServletResponse response) throws Exception {
         Workbook workbook = salesTestService.handleFile(file);
         response.setContentType("application/force-download");

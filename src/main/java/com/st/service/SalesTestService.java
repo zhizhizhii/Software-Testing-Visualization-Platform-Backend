@@ -29,18 +29,12 @@ public class SalesTestService {
         params.setTitleRows(0);
         params.setHeadRows(1);
         List<SalesCase> salesCases = ExcelImportUtil.importExcel(inputStream,SalesCase.class,params);
-        salesCases.forEach(System.out::println);
         String result;
         for(SalesCase item : salesCases){
             result r = test(item.getMachine(),item.getInspector(),item.getPeripheral());
             item.setActual(r.actual);
             item.setAmount(r.amount);
             item.setEarn(r.earn);
-
-            System.out.println(r.actual);
-            System.out.println(r.amount);
-            System.out.println(r.earn);
-
             if( (item.getPredict()).equals(r.actual)){
                 if( (item.getPre_amount()).equals(r.amount)){
                     result="测试通过";
@@ -52,7 +46,6 @@ public class SalesTestService {
             else{
                 result="测试未通过";
             }
-            System.out.println(result);
             item.setTest_result(result);
             item.setTest_time(new Date());
         }
@@ -77,6 +70,7 @@ public class SalesTestService {
             salesTestItemView.setActual(r.actual);
             salesTestItemView.setAmount(r.amount);
             salesTestItemView.setEarn(r.earn);
+            salesTestItemView.setTest_time(new Date());
             viewList.add(salesTestItemView);
         }
         salesTestView.setSalesTestItemViews(viewList);

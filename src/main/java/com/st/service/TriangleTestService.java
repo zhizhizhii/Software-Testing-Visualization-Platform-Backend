@@ -41,6 +41,7 @@ public class TriangleTestService {
             item.setActual(r.actual);
             item.setInfo(r.info);
             String ans = item.getExpectation().equals(r.actual)  ? "测试通过":"测试未通过";
+            item.setTest_result(ans);
             item.setTest_time(new Date());
         }
         Workbook workbook = ExcelExportUtil.exportExcel(new ExportParams("测试结果","而是结果"),TriangleCase.class,triangleCases);
@@ -55,6 +56,7 @@ public class TriangleTestService {
             triangleTestItemView.setId(item.getId());
             triangleTestItemView.setActual(result.actual);
             triangleTestItemView.setInfo(result.info);
+            triangleTestItemView.setTest_time(new Date());
             viewList.add(triangleTestItemView);
         }
         triangleTestView.setTriangleTestItemViews(viewList);
